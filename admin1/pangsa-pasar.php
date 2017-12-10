@@ -4,16 +4,14 @@ include 'header.php';
 if(isset($_POST['lihat'])){
   $tahun = $_POST['tahun'];
   # Query untuk Mencari nilai Pangsa Pasar Tertinggi
-  $queryPangsaPasarTertinggi = "SELECT max(round(penduduk_20/jumlah_penduduk * 100/100,3))
-                                       AS pangsaTertinggi,
-                                       (SELECT nama_kecamatan FROM kecamatan
-                                        INNER JOIN penduduk USING(kd_kecamatan)
-                                        WHERE round(penduduk_20/jumlah_penduduk * 100/100,3) =
-                                              (SELECT max(round(penduduk_20/jumlah_penduduk * 100/100,3)) FROM penduduk)
-                                       ) AS nama_kecamatan
+  $queryPangsaPasarTertinggi = "SELECT  max(round(penduduk_20/jumlah_penduduk * 100/100,3))
+                                        AS pangsaTertinggi,nama_kecamatan,latitude,longitude
                                 FROM kecamatan
                                 INNER JOIN penduduk USING(kd_kecamatan)
-                                WHERE tahun = '$tahun'";
+                                WHERE tahun = '$tahun'
+                                GROUP BY nama_kecamatan,latitude,longitude
+                                ORDER BY pangsaTertinggi DESC LIMIT 1";
+
 
   # Eksekusi Query Pangsa Pasar Tertinggi
   $hasilMax = mysqli_query($con,$queryPangsaPasarTertinggi)or die(mysqli_error($con));
@@ -136,7 +134,11 @@ if(isset($_POST['lihat'])){
                   dengan nilai <center><?=$pangsaPasarTertinggi['pangsaTertinggi']?>%</center>
                 </strong></font></p>
                 <br/>
+                <p>
+                  <input type="hidden" id="latitude" value="<?=$pangsaPasarTertinggi['latitude']?>">
+                  <input type="hidden" id="longitude" value="<?=$pangsaPasarTertinggi['longitude']?>">
 
+                </p>
                   <head>
                     <style>
                       #map {
@@ -149,22 +151,36 @@ if(isset($_POST['lihat'])){
                     <h3>My Google Maps Demo</h3>
                     <div id="map"></div>
                     <script>
-                        function initMap() {
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                          center: {lat: -34.397, lng: 150.644},
+                      var latitude = $('#latitude').val();
+                      var longitude = $('#longitude').val();
+
+                      var lokasi = {lat: parseFloat(latitude),lng: parseFloat(longitude)}
+
+                      var map;
+                      function initMap() {
+                        map = new google.maps.Map(document.getElementById('map'), {
+                          center: lokasi,
                           zoom: 12
                         });
 
-                          // Change this depending on the name of your PHP or XML file
+                        var marker = new google.maps.Marker({
+                          position: lokasi,
+                          map: map
+                        });
+
+                      }
+
+
+
                     </script>
                     <script
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDK0dq-uNt5X0ISlXZAEW7WRkwt8I_rfsg&callback=initMap">
                     </script>
-                  
+
                 <?php
                  }
                 ?>
-               
+
               </div>
 
             </div>
