@@ -1,5 +1,5 @@
 <?php
-	include 'koneksi.php';
+	 include 'koneksi.php';
    $idPelanggan = $_POST['idPelanggan'];
    $kdPromosi   = $_POST['kdPromosi'];
 
@@ -14,8 +14,8 @@
    $data1 = mysqli_fetch_array($querySMS);
    echo $data1['isi_sms'];
 
-// ambil no tlp dan isi sms 
-	
+// ambil no tlp dan isi sms
+
 // Script http API SMS Reguler Zenziva
 
 	$userkey="mr5oeh"; // userkey lihat di zenziva

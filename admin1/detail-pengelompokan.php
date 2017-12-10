@@ -92,7 +92,11 @@ $hasil = mysqli_query($con,$queryLRFM) or die(mysqli(error($con)));
                       <h1>Detail Pengelompokan</h1>
                       <hr>
                     </center>
-                    <a class="btn btn-primary" style="float: right" onclick="kirimsmsall('<?php echo $bulan?>')">Kirim SMS ke Semua</a><br>
+                    <a class="btn btn-primary"
+                       style="float: right"
+                       onclick="kirimsmsall('<?php echo $bulan ?>')">
+                      Kirim SMS ke Semua
+                    </a><br>
                     <table class="table">
                       <tr>
                         <th>Nama Pelanggan</th>
@@ -135,7 +139,7 @@ $hasil = mysqli_query($con,$queryLRFM) or die(mysqli(error($con)));
                                  $kdPromosi = ambilKodePromosi(golonganPelanggan($hasilLRFM['hasil_L'],
                                                                                  $hasilLRFM['hasil_R'],
                                                                                  $hasilLRFM['hasil_F'],
-                                                                                 $hasilLRFM['hasil_M'])); 
+                                                                                 $hasilLRFM['hasil_M']));
                          ?>
                        <td>
                           <a id="kirimsms" class="btn btn-primary" onclick="kirimsms('<?php echo $hasilLRFM['id_pelanggan']?>',
@@ -151,6 +155,7 @@ $hasil = mysqli_query($con,$queryLRFM) or die(mysqli(error($con)));
                     </table>
 
                   </div>
+                  <?php print($bulan)?>
           </div>
                 <!-- /.box -->
         </div>
@@ -182,6 +187,17 @@ function kirimsms(idPelanggan,kdPromosi){
               'kdPromosi'   : kdPromosi},
       success : function(response){
         alert('Pesan Terkirim')
+      }
+    })
+}
+
+function kirimsmsall(bulan){
+    $.ajax({
+      method : "POST",
+      url  : "kirimsms.php",
+      data : {'bulan' : bulan},
+      success : function(response){
+        alert(response)
       }
     })
 }
