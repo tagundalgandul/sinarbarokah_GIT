@@ -197,7 +197,7 @@ function kirimsmsall(bulan){
       url  : "kirimsms.php",
       data : {'bulan' : bulan},
       success : function(response){
-        alert(response)
+        alert('Pesan Terkirim')
       }
     })
 }
