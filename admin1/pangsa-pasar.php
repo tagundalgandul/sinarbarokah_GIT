@@ -148,7 +148,7 @@ if(isset($_POST['lihat'])){
                     </style>
                   </head>
                   <body>
-                    <h3>My Google Maps Demo</h3>
+                    <center><h3>Google Maps</h3></center>
                     <div id="map"></div>
                     <script>
                       var latitude = $('#latitude').val();
