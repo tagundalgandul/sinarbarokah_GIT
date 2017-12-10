@@ -1,8 +1,8 @@
 <?php
 
 	$host = 'localhost';
-	$user = 'null';
-	$pass = 'kitabersatu123!';
+	$user = 'root';
+	$pass = '';
 	$database= 'sinar-barokah';
 	$con = mysqli_connect($host, $user, $pass, $database);
 ?>
