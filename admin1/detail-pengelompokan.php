@@ -199,7 +199,11 @@ function kirimsmsall(bulan){
       url  : "kirimsms.php",
       data : {'bulan' : bulan},
       success : function(response){
+<<<<<<< HEAD
         alert('Pesan Terkirim');
+=======
+        alert('Pesan Terkirim')
+>>>>>>> 9ebc88b609ada05b852d125013e9a67ac3a75c47
       }
     })
 }
