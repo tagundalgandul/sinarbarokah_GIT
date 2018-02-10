@@ -142,6 +142,22 @@ include 'koneksi.php';
       return $kode;
     }
 
+		function TanggalIndo($date){
+			include 'koneksi.php';
+				$BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
+				$tahun = substr($date, 0, 4);
+				$bulan = substr($date, 5, 2);
+				$tgl   = substr($date, 8, 2);
+
+				$result = $tgl . " " . $BulanIndo[((int)$bulan-1)] . " ". $tahun;
+				return($result);
+			}
+
+			function rupiah($nilai, $pecahan = 0) {
+	    return 'Rp. '.number_format($nilai, $pecahan, ',', '.');
+			}
+
 		/*
 		* Fungsi menentukan kelompok pelanggan
 		*
@@ -209,5 +225,5 @@ include 'koneksi.php';
 
         $hasil = mysqli_fetch_assoc($run);
 
-        return $hasil['kd_promosi'];       
+        return $hasil['kd_promosi'];
     }

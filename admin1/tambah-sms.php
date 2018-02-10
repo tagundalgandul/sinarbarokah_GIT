@@ -7,34 +7,35 @@ include 'header.php';
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Tambah Kecamatan
-        
+        Tambah SMS
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        
-        <li class="active">Tambah promosi</li>
+
+        <li class="active">Tambah SMS</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">  
+        <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <form  method="POST">
+              <form  method="POST" onsubmit="return formValidasi()" name="tambahsms">
+                <div class="table-responsive">
                 <table class="table table-hover">
                   <div class="form-group">
                     <tr>
                       <td>
                         <label  class="col-sm-2 control-label">Isi sms</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="isi_sms"  placeholder="SMS">
+                          <input type="text" class="form-control" name="isi_sms"  placeholder="SMS" id="isisms">
                         </div>
                       </td>
-                    </tr>  
-                  </div>     
+                    </tr>
+                  </div>
                   <div class="form-group">
                     <tr>
                       <td>
@@ -49,36 +50,37 @@ include 'header.php';
                                   echo '<option value='.$data2['kd_promosi'].'>'.$data2['isi_promosi'].'</option>';
                                 }
                               }
-                            ?>  
+                            ?>
                           </select>
                         </div>
                       </td>
-                    </tr>       
+                    </tr>
                   </div>
                 </table>
+              </div>
                   <center>
-                 <button type="submit" class="btn-primary ">Reset</button>
-                 <button type="submit" name="tambah_sms" class="btn-primary " value="submit">Save</button>
+                 <button type="submit" class="btn btn-primary ">Reset</button>
+                 <button type="submit" name="tambah_sms" class="btn btn-primary " value="submit">Save</button>
                   </center>
               </form>
             </div>
           <!-- /.box -->
           </div>
-        <!-- /.col -->           
+        <!-- /.col -->
         </div>
-      <!-- /.row -->  
+      <!-- /.row -->
       </div>
     </section>
   <!-- /.content-wrapper -->
-  </div> 
+  </div>
 <?php
-include 'footer.php'; 
+include 'footer.php';
 
  if(isset($_POST['tambah_sms'])) {
-    $kd_sms =kd_sms(); 
+    $kd_sms =kd_sms();
     $isi_sms =$_POST['isi_sms'];
     $kd_promosi =$_POST ['promosi'];
-  
+
     $queryTambahSMS = "INSERT INTO sms VALUES(  '$kd_sms', '$isi_sms','$kd_promosi' )";
 
     $query_update = mysqli_query($con,$queryTambahSMS) or die (mysqli_error($con));
@@ -86,3 +88,23 @@ include 'footer.php';
  }
 
 ?>
+<script type="text/javascript">
+  function formValidasi(){
+    var isisms = $('#isisms').val();
+    var promosi = document.tambahsms.promosi;
+    var angka = /^[0-9]+$/;
+
+
+    if (isisms == ""){
+       alert("Harap Isi Semua Bidang !!!");
+       return false;
+    }
+
+    if (promosi.selectedIndex < 1) {
+       alert("Harap Isi Semua Bidang !!!");
+       return false;
+    }
+
+    return true;
+}
+</script>

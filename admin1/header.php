@@ -1,12 +1,11 @@
-<?php 
+<?php
  include "koneksi.php";
  include "lib_func.php";
  session_start();
  if(!isset($_SESSION['ses_user'])){
      header("Location:login.php");
  }
- 
- 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
   <title>Sinar Barokah</title>
-
+  <link rel="icon" type="image/png" href="img/logo.png">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
@@ -41,7 +40,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  
+
 
       <!-- jQuery 2.2.0 -->
   <script src="../admin/plugins/jQuery/jQuery-2.2.0.min.js"></script>
@@ -58,7 +57,7 @@
   <script src="../admin/dist/js/app.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../admin/dist/js/demo.js"></script>
-  
+
   <!-- page script -->
   <!-- chart js  -->
   <link rel="stylesheet" href="../css/chartjs.css">
@@ -90,18 +89,18 @@
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
-            
+
             <ul class="dropdown-menu">
             </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
-         
+
             <ul class="dropdown-menu">
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                 
+
                   <li>
-                    
+
                   </li>
                 </ul>
               </li>
@@ -110,16 +109,16 @@
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
-           
+
             <ul class="dropdown-menu">
-            
+
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                
+
                 </ul>
               </li>
               <li class="footer">
-              
+
               </li>
             </ul>
           </li>
@@ -129,7 +128,7 @@
              <span class="hidden-xs"> <?php $uper=strtoupper(@$_SESSION[ses_user]); echo "$uper"; ?></span>-
               <span class="hidden-xs"> <?php $uper=strtoupper(@$_SESSION[ses_pengguna]); echo "$uper"; ?></span>
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-             
+
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -142,7 +141,7 @@
                 </p>
               </li>
               <!-- Menu Body -->
-              
+
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
@@ -156,11 +155,11 @@
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            
+
           </li>
         </ul>
       </div>
-    </nav>  
+    </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
@@ -173,7 +172,7 @@
         </div>
         <div class="pull-left info">
            <?php $uper=strtoupper(@$_SESSION[ses_pengguna]); echo "$uper"; ?><br>
-          
+
         </div>
       </div>
       <!-- search form -->
@@ -190,7 +189,7 @@
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-file"></i>
+            <i class="glyphicon glyphicon-briefcase"></i>
             <span>Pengolahan Data Master</span>
             <span class="pull-right-container">
               <span class="fa fa-angle-left pull-right"></span>
@@ -201,52 +200,14 @@
             <!-- <li><a href="tambah_pengguna.php"><i class="fa fa-user"></i> Tambah Pengguna</a></li> -->
             <li><a href="kecamatan.php"><i class="fa fa-file"></i> Data kecamatan</a></li>
             <li><a href="penduduk.php"><i class="fa fa-file"></i> Data Penduduk</a></li>
-            <li><a href="sms.php"><i class="fa  fa-envelope"></i> SMS</a></li>
+            <!-- <li><a href="datapenjualan.php"><i class="fa  fa-envelope"></i> data penjualan</a></li> -->
           </ul>
         </li>
-<!--         <li class="treeview">
-          <a href="#">
-            <i class="glyphicon glyphicon-briefcase"></i>
-            <span>Produk</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="produk.php"><i class="glyphicon glyphicon-briefcase"></i> Data Produk</a></li>
-            <li><a href="tambah_produk.php"><i class="glyphicon glyphicon-briefcase"></i> Tambah Produk</a></li>
-          </ul>
-        </li>
-         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-file"></i>
-            <span>Data BPS</span>
-            <span class="pull-right-container">
-              <span class="fa fa-angle-left pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            
-          </ul>
-        </li>
-        <!-- <li class="treeview">
-          <a href="sms.php">
-            <i class="fa  fa-envelope"></i>
-            <span>SMS</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="kelompok.php"><i class="glyphicon glyphicon-shopping-cart"></i> kelompok</a></li>
-            <li><a href="tambah_penjualan.php"><i class="glyphicon glyphicon-shopping-cart"></i> Tambah transaksi</a></li>
-          </ul>
-        </li> -->
         <?php
-          }elseif ($_SESSION['ses_user']=='pemilik'){?> 
+          }elseif ($_SESSION['ses_user']=='pemilik'){?>
            <li class="treeview">
           <a href="">
-            <i class="fa fa-file"></i>
+            <i class="glyphicon glyphicon-briefcase"></i>
             <span>Pengolahan Data Master</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right"></span>
@@ -256,10 +217,11 @@
             <li><a href="pengguna.php"><i class="fa fa-user"></i> Data Pengguna</a></li>
             <li><a href="pelanggan.php"><i class="fa fa-user"></i> Data Pelanggan</a></li>
              <li><a href="kelompok.php"><i class="fa fa-users"></i> kelompok</a></li>
-              <li><a href="transaksi.php"><i class="glyphicon glyphicon-shopping-cart"></i> Data Transaksi</a></li>
+              <li><a href="datapenjualan.php"><i class="glyphicon glyphicon-shopping-cart"></i> Data Transaksi</a></li>
               <li><a href="produk.php"><i class="glyphicon glyphicon-briefcase"></i> Data Produk</a></li>
-              <li><a href="promosi.php"><i class="fa  fa-envelope"></i> Promosi</a></li>
-              <li><a href="sms.php"><i class="fa  fa-envelope"></i> SMS</a></li>
+              <li><a href="promosi.php"><i class="fa  fa-envelope"></i> Data Promosi</a></li>
+              <li><a href="sms.php"><i class="fa  fa-envelope"></i> Data SMS</a></li>
+              <li><a href="kritik_saran.php"><i class="fa  fa-envelope"></i> Data Kritik Dan Saran</a></li>
             <!-- <li><a href="pangsa-pasar.php"><i class="fa fa-file"></i> Hasil Pangsa Pasar</a></li> -->
             <!-- <li><a href="tambah_penjualan.php"><i class="glyphicon glyphicon-shopping-cart"></i> Tambah transaksi</a></li> -->
           </ul>
@@ -271,10 +233,6 @@
               <span class="label label-primary pull-right"></span>
             </span>
           </a>
-          <!-- <ul class="treeview-menu">
-            <li><a href="pangsa-pasar.php"><i class="fa fa-file"></i> Hasil Pangsa Pasar</a></li>
-            <li><a href="tambah_penjualan.php"><i class="glyphicon glyphicon-shopping-cart"></i> Tambah transaksi</a></li>
-          </ul> -->
         </li>
          <li class="treeview">
           <a href="pengelompokan.php">
@@ -284,94 +242,10 @@
               <span class="label label-primary pull-right"></span>
             </span>
           </a>
-          <!-- <ul class="treeview-menu">
-            <li><a href="pangsa-pasar.php"><i class="fa fa-file"></i> Hasil Pangsa Pasar</a></li>
-            <li><a href="tambah_penjualan.php"><i class="glyphicon glyphicon-shopping-cart"></i> Tambah transaksi</a></li>
-          </ul> -->
         </li>
-       <!--  <li class="treeview">
-          <a href="#">
-            <i class="fa fa-users"></i>
-            <span>pelanggan</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pelanggan.php"><i class="fa fa-user"></i> Data Pelanggan</a></li>
-            <li><a href=""><i class="fa fa-user"></i> Tambah Pelanggan</a></li>
-          </ul> 
-        </li> -->
-         <!--  <li class="treeview">
-          <a href="#">
-            <i class="fa fa-users"></i>
-            <span>Kelompok</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="kelompok.php"><i class="fa fa-users"></i> kelompok</a></li>
-            <li><a href="tambah_penjualan.php"><i class="glyphicon glyphicon-shopping-cart"></i> Tambah transaksi</a></li> 
-          </ul>
-        </li> -->
-         <!-- <li class="treeview">
-          <a href="#">
-            <i class="glyphicon glyphicon-shopping-cart"></i>
-            <span>Transaksi</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="transaksi.php"><i class="glyphicon glyphicon-shopping-cart"></i> Data Transaksi</a></li>
-            <li><a href="tambah_penjualan.php"><i class="glyphicon glyphicon-shopping-cart"></i> Tambah transaksi</a></li> 
-          </ul>
-        </li> -->
-      <!--   <li class="treeview">
-          <a href="#">
-            <i class="glyphicon glyphicon-briefcase"></i>
-            <span>Produk</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="produk.php"><i class="glyphicon glyphicon-briefcase"></i> Data Produk</a></li>
-            <li><a href="tambah_produk.php"><i class="glyphicon glyphicon-briefcase"></i> Tambah Produk</a></li>
-          </ul>
-        </li> -->
-        <!-- <li class="treeview">
-          <a href="#">
-            <i class="fa  fa-envelope"></i>
-            <span>Promosi</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="promosi.php"><i class="fa  fa-envelope"></i> Promosi</a></li>
-            <li><a href="tambah_penjualan.php"><i class="fa  fa-envelope"></i> Tambah transaksi</a></li>
-          </ul>
-        </li> -->
-         
-          <!-- <li class="treeview">
-          <a href="sms.php">
-            <i class="fa  fa-envelope"></i>
-            <span>SMS</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a> -->
-         <!--  <ul class="treeview-menu">
-            <li><a href="kelompok.php"><i class="glyphicon glyphicon-shopping-cart"></i> kelompok</a></li>
-            <li><a href="tambah_penjualan.php"><i class="glyphicon glyphicon-shopping-cart"></i> Tambah transaksi</a></li>
-          </ul>
-        </li> -->
-       
            <?php
           }
-          else{?> 
+          else{?>
            <li class="treeview">
           <a href="#">
             <i class="glyphicon glyphicon-briefcase"></i>
@@ -382,64 +256,12 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="produk.php"><i class="glyphicon glyphicon-briefcase"></i> Data Produk</a></li>
-            <li><a href="promosi.php"><i class="fa  fa-envelope"></i> Promosi</a></li>
+            <li><a href="promosi.php"><i class="fa  fa-envelope"></i> Data Promosi</a></li>
             <li><a href="pelanggan.php"><i class="fa fa-user"></i> Data Pelanggan</a></li>
             <li><a href="transaksi.php"><i class="glyphicon glyphicon-shopping-cart"></i> Data Transaksi</a></li>
             <!-- <li><a href="tambah_produk.php"><i class="glyphicon glyphicon-briefcase"></i> Tambah Produk</a></li> -->
           </ul>
         </li>
-       <!-- <li class="treeview">
-          <a href="#">
-            <i class="fa  fa-envelope"></i>
-            <span>Promosi</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="promosi.php"><i class="fa  fa-envelope"></i> Promosi</a></li>
-            <li><a href="tambah_penjualan.php"><i class="fa  fa-envelope"></i> Tambah transaksi</a></li>
-          </ul>
-        </li>  -->
-         <!-- <li class="treeview">
-          <a href="#">
-            <i class="fa fa-users"></i>
-            <span>pelanggan</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pelanggan.php"><i class="fa fa-user"></i> Data Pelanggan</a></li>
-            <li><a href=""><i class="fa fa-user"></i> Tambah Pelanggan</a></li>
-          </ul>
-        </li> -->
-        <!--  <li class="treeview">
-          <a href="#">
-            <i class="glyphicon glyphicon-shopping-cart"></i>
-            <span>Transaksi</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="transaksi.php"><i class="glyphicon glyphicon-shopping-cart"></i> Data Transaksi</a></li>
-            <li><a href="tambah-transaksi.php"><i class="glyphicon glyphicon-shopping-cart"></i> Tambah transaksi</a></li>
-          </ul>
-        </li> -->
-        <!-- <li class="treeview">
-          <a href="#">
-            <i class="glyphicon glyphicon-shopping-cart"></i>
-            <span>pengelompokan pelanggan</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right"></span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href=""><i class="glyphicon glyphicon-shopping-cart"></i> pengelompokan</a></li>
-             <li><a href=""><i class="glyphicon glyphicon-shopping-cart"></i> Tambah transaksi</a></li> 
-          </ul>
-        </li> -->
       </ul>
         <?php
 }

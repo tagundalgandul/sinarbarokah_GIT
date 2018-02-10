@@ -1,5 +1,4 @@
-<?php 
-
+<?php
   include'koneksi.php';
 ?>
 <!DOCTYPE html>
@@ -8,6 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>SINAR BAROKAH</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
@@ -28,22 +28,22 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page ">
 <div class="login-box">
   <div class="login-logo">
     <a href="login.php"><b>SINAR BAROKAH</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Login </p>
+    <p class="login-box-msg">LOGIN </p>
 
-    <form action="cek_login.php" method="post">
+    <form action="cek_login.php" method="post" onsubmit="return formValidasi()" name="login">
       <div class="form-group has-feedback">
-        <input type="text" name="email" class="form-control" placeholder="email">
+        <input type="email" name="email" class="form-control" placeholder="email" id="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password" id="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -61,12 +61,6 @@
         <!-- /.col -->
       </div>
     </form>
-
-   
-  
-
-   
-
   </div>
   <!-- /.login-box-body -->
 </div>
@@ -78,6 +72,24 @@
 <script src="../admin/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="../admin/plugins/iCheck/icheck.min.js"></script>
+
+<script type="text/javascript">
+function formValidasi(){
+    var email = $('#email').val();
+    var password = $('#password').val();
+
+    if (email == ""){
+       alert("Email Tidak Boleh Kosong !!!");
+       return false;
+    }
+    if (password == ""){
+       alert("Harap Isi Password ANDA !!!");
+       return false;
+    }
+
+    return true;
+}
+</script>
 <script>
   $(function () {
     $('input').iCheck({
@@ -89,5 +101,3 @@
 </script>
 </body>
 </html>
-<?php
-?>

@@ -1,8 +1,8 @@
 <?php
-include 'header.php';
- $kd_barang=$_GET['kd_barang'];
-  $query = mysqli_query($con, "SELECT * FROM produk where kd_barang='$_GET[kd_barang]'");
-    $data = mysqli_fetch_array($query);
+   include 'header.php';
+   $kd_barang=$_GET['kd_barang'];
+   $query = mysqli_query($con, "SELECT * FROM produk where kd_barang='$_GET[kd_barang]'");
+   $data = mysqli_fetch_array($query);
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -10,11 +10,11 @@ include 'header.php';
     <section class="content-header">
       <h1>
         Edit Produk
-        
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        
+
         <li class="active">Edit Produk</li>
       </ol>
     </section>
@@ -22,64 +22,77 @@ include 'header.php';
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">  
+        <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <form  method="POST">
+              <form  method="POST" onsubmit="return formValidasi()"  enctype="multipart/form-data" action="proses_edit_produk.php" id="editproduk">
                 <table class="table table-hover">
                   <div class="form-group">
+
+                      <input type="hidden" class="form-control" name="kd_barang" value="<?php echo $data['kd_barang']; ?>" placeholder="nama produk">
+
                     <tr>
                       <td>
                         <label class="col-sm-2 control-label">Nama Produk</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="nama_barang" value="<?php echo $data['nama_barang']; ?>" placeholder="nama produk">
+                          <input type="text" class="form-control" name="nama_barang" value="<?php echo $data['nama_barang']; ?>" placeholder="nama produk" id="namaproduk">
                         </div>
                       </td>
-                    </tr>       
+                    </tr>
                   </div>
                   <div class="form-group">
                     <tr>
                       <td>
                         <label  class="col-sm-2 control-label">Harga</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="harga" value="<?php echo $data['harga'] ?>" placeholder="harga">
+                          <input type="text" class="form-control" name="harga" value="<?php echo $data['harga'] ?>" placeholder="harga" id="harga">
                         </div>
                       </td>
-                    </tr>       
+                    </tr>
                   </div>
 
                 </table>
                  <div class="form-group">
-                  <label for="exampleInputFile"> Gambar</label>
-                  <input type="file" name="gambar" id="exampleInputFile" value="<?php echo $data['gambar'];  ?>"><?php echo $data['gambar'];  ?>
+                   <a href="form-ubah-gambar.php?kd_barang=<?php echo $data['kd_barang'];?>" class="btn btn-default"> Ubah Gambar </a>
+                  <!-- <label for="exampleInputFile"> Gambar</label>
+                  <input type="file" name="gambar" id="exampleInputFile" value="<?php echo $data['gambar'];  ?>"><?php echo $data['gambar'];  ?> -->
                 </div>
-                        
+
                   <center>
-                 <button type="submit" class="btn primary ">Reset</button>
+                 <button type="reset" class="btn primary ">Reset</button>
                  <button type="submit" name="edit_produk" class="btn primary " value="submit">Save</button>
                   </center>
               </form>
             </div>
           <!-- /.box -->
           </div>
-        <!-- /.col -->           
+        <!-- /.col -->
         </div>
-      <!-- /.row -->  
+      <!-- /.row -->
       </div>
     </section>
   <!-- /.content-wrapper -->
-  </div> 
-<?php
-include 'footer.php'; 
+  </div>
+  <script type="text/javascript">
+    function formValidasi(){
+      var namaproduk= $('#namaproduk').val();
+      var harga = $('#harga').val();
+      var angka = /^[0-9]+/;
 
-if(isset($_POST['edit_produk'])) {
-$nama_barang =$_POST['nama_barang'];
-$harga =$_POST['harga'];
-$gambar =$_POST['gambar'];
 
-  
-$query_update=mysqli_query($con, "UPDATE produk SET nama_barang='$nama_barang', harga='$harga', gambar='$gambar' WHERE kd_barang='$kd_barang'" ) or die (mysqli_error($con));
+      if (namaproduk == "") {
+        alert ("Harap isi Semua Bidang");
+        return false;
+      }
+      if (harga == "") {
+        alert ("Harap isi semua bidang !!!");
+        return false;
+      }
+      if (!harga.match(angka)) {
+          alert ("harap isi harga dengan angka !!!");
+          return false;
+      }
+      return true;
+    }
 
-echo '<script language="javascript">alert("Sukses Mengubah Data produk");document.location="produk.php"</script>';
-}
-?>
+  </script>

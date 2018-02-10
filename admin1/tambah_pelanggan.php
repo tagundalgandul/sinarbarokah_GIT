@@ -9,11 +9,11 @@ $query = mysqli_query($con, "SELECT * FROM pelanggan join kecamatan using (kd_ke
     <section class="content-header">
       <h1>
         Tambah Pelanggan
-        
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        
+
         <li class="active">Tambah Pelanggan</li>
       </ol>
     </section>
@@ -21,20 +21,20 @@ $query = mysqli_query($con, "SELECT * FROM pelanggan join kecamatan using (kd_ke
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">  
+        <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <form  method="POST">
+              <form  method="POST" onsubmit="return formValidasi()" name="tambahPelanggan">
                 <table class="table table-hover">
                   <div class="form-group">
                     <tr>
                       <td>
                         <label  class="col-sm-2 control-label">Nama Pelanggan</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="nama_pelanggan"  placeholder="nama pelanggan">
+                          <input type="text" class="form-control" name="nama_pelanggan"  placeholder="nama pelanggan" id="nama_pelanggan">
                         </div>
                       </td>
-                    </tr>       
+                    </tr>
                   </div>
                    <div class="form-group">
                     <tr>
@@ -48,17 +48,17 @@ $query = mysqli_query($con, "SELECT * FROM pelanggan join kecamatan using (kd_ke
                           </select>
                           </div>
                         </td>
-                    </tr>       
+                    </tr>
                   </div>
                   <div class="form-group">
                     <tr>
                       <td>
                         <label  class="col-sm-2 control-label">No Hp</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="no_tlp"  placeholder="No HP">
+                          <input type="text" class="form-control" name="no_tlp"  placeholder="No HP" id="no_tlp">
                         </div>
                       </td>
-                    </tr>       
+                    </tr>
                   </div>
                    <div class="form-group">
                     <tr>
@@ -75,40 +75,78 @@ $query = mysqli_query($con, "SELECT * FROM pelanggan join kecamatan using (kd_ke
                                 }
                               }
                             ?>
-                          
+
                           </select>
                           </div>
                         </td>
-                    </tr>       
+                    </tr>
                   </div>
                 </table>
                   <center>
-                 <button type="submit" class="btn-primary ">Reset</button>
-                 <button type="submit" name="tambah_pelanggan" class="btn-primary " value="submit">Save</button>
+                 <button type="reset" class="btn primary ">Reset</button>
+                 <button type="submit" name="tambah_pelanggan" class="btn primary " value="submit">Save</button>
                   </center>
               </form>
             </div>
           <!-- /.box -->
           </div>
-        <!-- /.col -->           
+        <!-- /.col -->
         </div>
-      <!-- /.row -->  
+      <!-- /.row -->
       </div>
     </section>
   <!-- /.content-wrapper -->
-  </div> 
+  </div>
 <?php
-include 'footer.php'; 
+include 'footer.php';
 
 if(isset($_POST['tambah_pelanggan'])) {
- $id_pelanggan =id_pelanggan(); 
+ $id_pelanggan =id_pelanggan();
 $nama_pelanggan =$_POST['nama_pelanggan'];
 $jk =$_POST['jk'];
 $no_tlp =$_POST['no_tlp'];
 $kecamatan =$_POST['kecamatan'];
-  
+
 $query_update=mysqli_query($con, "insert into pelanggan values ( '$id_pelanggan', '$nama_pelanggan', '$jk', '$no_tlp', '$kecamatan' )") or die (mysqli_error($con));
 
 echo '<script language="javascript">alert("Sukses menambah Data pelanggan");document.location="pelanggan.php"</script>';
 }
 ?>
+
+<script type="text/javascript">
+function formValidasi(){
+    var namapelanggan = $('#nama_pelanggan').val();
+    var jenisKelamin = document.tambahPelanggan.jk;
+    var no_tlp = $('#no_tlp').val();
+    var kecamatan = document.tambahPelanggan.kecamatan;
+    var angka = /^[0-9]+$/;
+    // var nohp = $('#no_tlp').val();
+
+    if(!no_tlp.match(angka)){
+       alert("No hp harus angka ");
+       return false;
+    }
+
+    if (namapelanggan == ""){
+       alert("Nama Pelanggan Tidak Boleh Kosong !!!");
+       return false;
+    }
+
+    if (jenisKelamin.selectedIndex < 1) {
+       alert("Jenis Kelamin Tidak boleh Kosong !!!");
+       return false;
+    }
+
+    if (no_tlp == "") {
+       alert("No telpon Tidak boleh Kosong !!!");
+       return false;
+    }
+
+    if (kecamatan.selectedIndex < 1) {
+       alert("Zone Tidak boleh Kosong !!!");
+       return false;
+    }
+
+    return true;
+}
+</script>

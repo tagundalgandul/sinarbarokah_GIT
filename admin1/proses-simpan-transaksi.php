@@ -30,7 +30,7 @@ if(isset($_POST) && !empty($_POST)){
 		$hsl = mysqli_fetch_array($sql2);
 		$harga = $hsl['harga'];
 		$cek_brg = mysqli_query($con,"SELECT * FROM det_transaksi WHERE no_faktur='$no_faktur' AND kd_barang='$kd_barang'");
-	
+
 	if(mysqli_num_rows($cek_brg)>0){
 		$tambah = mysqli_query($con,"UPDATE det_transaksi set qty=qty+'$qty', subtotal=subtotal+('$harga'*'$qty') WHERE no_faktur='$no_faktur' AND kd_barang='$kd_barang'");
 		$update = mysqli_query($con,"UPDATE transaksi set total=total+('$harga'*'$qty') where no_faktur='$no_faktur'");

@@ -1,6 +1,6 @@
 <?php
 include 'header.php';
-$query = mysqli_query($con, "SELECT * FROM SMS ");
+$query = mysqli_query($con, "SELECT * FROM sms ");
 
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -9,11 +9,11 @@ $query = mysqli_query($con, "SELECT * FROM SMS ");
     <section class="content-header">
       <h1>
          SMS
-        
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        
+
         <li class="active">Data SMS</li>
       </ol>
     </section>
@@ -21,20 +21,21 @@ $query = mysqli_query($con, "SELECT * FROM SMS ");
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">  
+        <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
               </div>
-              <p align=" center"><a  href="tambah-sms.php"><button class="btn-primary">Tambah SMS</button></a></p><br>
+              <p align=" center"><a  href="tambah-sms.php"><button class="btn btn-primary">Tambah SMS</button></a></p><br>
                  <!-- /.box-header -->
                   <div class="box-body">
+                    <div class="table-responsive">
                  <table id="dataTables" class="table table-bordered table-striped">
                        <thead>
                         <tr>
                           <th>No</th>
                           <th>Kode SMS</th>
-                          <th>ISI SMS</th>
                           <th>KD Promosi</th>
+                          <th>ISI SMS</th>
                           <th>Opsi</th>
                         </tr>
                       </thead>
@@ -47,25 +48,26 @@ $query = mysqli_query($con, "SELECT * FROM SMS ");
                        <tr>
                         <td><?php echo "$no"; ?></td>
                         <td><?php echo "$data[kd_sms] "; ?></td>
-                        <td><?php echo "$data[isi_sms]";?></td>
                         <td><?php echo "$data[kd_promosi]"; ?></td>
+                        <td><p align="justify"> <?php echo "$data[isi_sms]";?></p></td>
                         <td>
                          <a href="edit_sms.php?kd_sms=<?php echo "$data[kd_sms]" ?>"><i class="fa fa-pencil"></i> Edit</a>
                          <a href="hapus-sms.php?kd_sms=<?php echo $data['kd_sms'];?>" onclick="return confirm('Yakin mau di hapus?');"><i class="glyphicon glyphicon-trash"></i>Hapus</a>
                         </td>
-                        </tr>           
-                        <?php 
+                        </tr>
+                        <?php
                            }
-                        ?> 
-                      </tbody> 
-                    </table>   
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
             </div>
           </div>
                 <!-- /.box -->
         </div>
               <!-- /.col -->
       </div>
-             
+
             <!-- /.row -->
       </div>
       </section>
@@ -82,5 +84,5 @@ $query = mysqli_query($con, "SELECT * FROM SMS ");
 
 <?php
 
-include 'footer.php'; 
+include 'footer.php';
 ?>

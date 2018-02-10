@@ -7,11 +7,11 @@ include 'header.php';
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Home  
+        Home
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        
+
         <li class="active">Home</li>
       </ol>
     </section>
@@ -20,17 +20,15 @@ include 'header.php';
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-          
+
           <div class="box">
             <div class="box-header">
-             
+
             </div>
             <!-- /.box-header -->
             <div class="box-body">
            <p align="center"> <font size="7" face="comic sans ms">SELAMAT DATANG <?php $uper=strtoupper(@$_SESSION[ses_pengguna]); echo "$uper"; ?> Di SINAR BAROKAH SUBANG</font> </p>
 
-      
-          
           </div>
           <!-- /.box -->
         </div>
@@ -41,12 +39,7 @@ include 'header.php';
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
-
-  
- 
 
 <?php
-
-include 'footer.php'; 
+include 'footer.php';
 ?>

@@ -75,7 +75,7 @@ $hasil = mysqli_query($con,$queryLRFM) or die(mysqli(error($con)));
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
 
-        <li class="active">Data Produk</li>
+        <li class="active">Pengelompokan Pelanggan</li>
       </ol>
     </section>
 
@@ -89,14 +89,15 @@ $hasil = mysqli_query($con,$queryLRFM) or die(mysqli(error($con)));
                   <div class="box-body">
 
                     <center>
-                      <h1>Detail Pengelompokan</h1>
+                      <h1>Detail Pengelompokan </h1>
                       <hr>
                     </center>
                     <a class="btn btn-primary"
                        style="float: right"
                        onclick="kirimsmsall('<?php echo $bulan ?>')">
                       Kirim SMS ke Semua
-                    </a><br>
+                    </a><br><br>
+                  <div class="table-responsive">
                     <table class="table">
                       <tr>
                         <th>Nama Pelanggan</th>
@@ -153,7 +154,7 @@ $hasil = mysqli_query($con,$queryLRFM) or die(mysqli(error($con)));
                    ?>
 
                     </table>
-
+                </div>
                   </div>
                   <?php print($bulan)?>
           </div>
@@ -172,6 +173,7 @@ $hasil = mysqli_query($con,$queryLRFM) or die(mysqli(error($con)));
     $("#btn-tampilChart").click(function(){
         $('#tampilChart').load("tampil-chart.php");
     })
+
  </script>
 
 <?php
@@ -197,7 +199,7 @@ function kirimsmsall(bulan){
       url  : "kirimsms.php",
       data : {'bulan' : bulan},
       success : function(response){
-        alert('Pesan Terkirim')
+        alert('Pesan Terkirim');
       }
     })
 }

@@ -1,10 +1,9 @@
 <?php
-	ob_start();
-	session_start();
+
 	include "koneksi.php";
 	$user=$_POST['email'];
 	$pass=$_POST['password'];
-	
+
 	$user = stripslashes($user);
     $pass = stripslashes($pass);
     $user = $user;
@@ -17,8 +16,11 @@
     $level=$data['level'];
     $email=$data['email'];
     $password=$data['password'];
+
 	if ($user == $email && password_verify($pass, $password)) {
-        $_SESSION[ses_user]     = $data[level];
+		ob_start();
+		session_start();
+    $_SESSION[ses_user]     = $data[level];
 		$_SESSION[ses_pengguna] = $data[nama_pengguna];
 		$_SESSION[ses_email]    = $data[email];
 		$_SESSION[ses_id]       = $data[id_pengguna];

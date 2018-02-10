@@ -1,8 +1,17 @@
 <?php
 include 'header.php';
 
+
 if(isset($_POST['lihat'])){
+
   $tahun = $_POST['tahun'];
+
+  $query = "SELECT tahun FROM penduduk
+            WHERE tahun='$tahun' ";
+  $exec = mysqli_query($con,$query);
+  $tahun_penduduk = mysqli_fetch_assoc($exec);
+
+
   # Query untuk Mencari nilai Pangsa Pasar Tertinggi
   $queryPangsaPasarTertinggi = "SELECT  max(round(penduduk_20/jumlah_penduduk * 100/100,3))
                                         AS pangsaTertinggi,nama_kecamatan,latitude,longitude
@@ -18,7 +27,6 @@ if(isset($_POST['lihat'])){
 
   # Ambil Nilai Tertinggi
   $pangsaPasarTertinggi = mysqli_fetch_assoc($hasilMax);
-
 
 
   # Query untuk menghitung  Pangsa Pasar
@@ -38,7 +46,8 @@ if(isset($_POST['lihat'])){
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Pangsa Pasar
+        ANALISIS PANGSA PASAR
+        <!-- Pangsa Pasar <?php echo $tahun['tahun'] ?> -->
 
       </h1>
       <ol class="breadcrumb">
@@ -77,8 +86,15 @@ if(isset($_POST['lihat'])){
                         </center>
                      </form>
                 <?php
+
+
                  # Perhitungan  Pangsa Pasar
                  if (isset($_POST['lihat'])) {
+
+                   if (count($tahun_penduduk) < 1) {
+                     echo "<center><h1>Data Tidak Ada</h1></center>";
+                     exit;
+                   }
 
                 ?>
                     <div class="header">
@@ -130,10 +146,20 @@ if(isset($_POST['lihat'])){
                 <p align="justify"><font color="red"><strong>
                   Berdasarkan hasil analisis pangsa pasar di tiap kecamatan
                   maka kecamatan <?=$pangsaPasarTertinggi['nama_kecamatan']?>
-                  menjadi daerah pemasaran yang baru yang direkomendasikan oleh sistem
+                  menjadi daerah pemasaran baru yang direkomendasikan oleh sistem
                   dengan nilai <center><?=$pangsaPasarTertinggi['pangsaTertinggi']?>%</center>
                 </strong></font></p>
                 <br/>
+                <?php
+                    $namaKecamatan = $pangsaPasarTertinggi['nama_kecamatan'];
+                    $pangsaPasar = $pangsaPasarTertinggi['pangsaTertinggi'];
+                ?>
+                <!-- <span id="infoMarker">
+
+
+                </span> -->
+
+                <input type="hidden" id="infoMarker" name="" value="<?php print "kecamatan : $namaKecamatan " . "\n". "Pangsa Pasar : $pangsaPasar" ?>">
                 <p>
                   <input type="hidden" id="latitude" value="<?=$pangsaPasarTertinggi['latitude']?>">
                   <input type="hidden" id="longitude" value="<?=$pangsaPasarTertinggi['longitude']?>">
@@ -153,6 +179,7 @@ if(isset($_POST['lihat'])){
                     <script>
                       var latitude = $('#latitude').val();
                       var longitude = $('#longitude').val();
+                      var infoMarker = $('#infoMarker').val();
 
                       var lokasi = {lat: parseFloat(latitude),lng: parseFloat(longitude)}
 
@@ -163,10 +190,16 @@ if(isset($_POST['lihat'])){
                           zoom: 12
                         });
 
+
                         var marker = new google.maps.Marker({
                           position: lokasi,
+                          title : infoMarker,
                           map: map
                         });
+
+                        marker.addListener('mouseup', function() {
+                           infowindow.open(map, marker);
+                         });
 
                       }
 

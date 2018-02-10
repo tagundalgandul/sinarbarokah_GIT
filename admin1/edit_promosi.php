@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 $kd_promosi = $_GET['kd_promosi'];
-$query = mysqli_query($con, "SELECT * FROM promosi");
+$query = mysqli_query($con, "SELECT * FROM promosi WHERE kd_promosi ='$_GET[kd_promosi]' ");
     $data = mysqli_fetch_array($query);
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -10,11 +10,11 @@ $query = mysqli_query($con, "SELECT * FROM promosi");
     <section class="content-header">
       <h1>
         Edit promosi
-        
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        
+
         <li class="active">Edit promosi</li>
       </ol>
     </section>
@@ -22,68 +22,87 @@ $query = mysqli_query($con, "SELECT * FROM promosi");
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">  
+        <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <form  method="POST">
+              <form  method="POST" onsubmit="return formValidasi()" name="editpromosi">
                 <table class="table table-hover">
                   <div class="form-group">
                     <tr>
                       <td>
                         <label  class="col-sm-2 control-label">isi Promosi</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="isi_promosi" value="<?php echo $data['isi_promosi']; ?>"  placeholder="nama kecamatan">
+                          <input type="text" class="form-control" name="isi_promosi" value="<?php echo $data['isi_promosi']; ?>"  placeholder="isi promosi" id="isipromosi">
                         </div>
-                      </td>       
+                      </td>
                   </div>
                   <div class="form-group">
                     <tr>
                       <td>
                         <label  class="col-sm-2 control-label">Tanggal Berlaku</label>
                         <div class="col-sm-10">
-                          <input type="date" class="form-control" name="tgl_berlaku" value="<?php echo $data['tgl_berlaku']; ?>"  placeholder="nama kecamatan">
+                          <input type="date" class="form-control" name="tgl_berlaku" value="<?php echo $data['tgl_berlaku']; ?>"  placeholder="Tanggal Berlaku" id="tglberlaku">
                         </div>
-                      </td>       
+                      </td>
                   </div>
                   <div class="form-group">
                     <tr>
                       <td>
                         <label  class="col-sm-2 control-label">Tanggal Berakhir</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="tgl_berakhir" value="<?php echo $data['tgl_berakhir']; ?>"  placeholder="nama kecamatan">
+                          <input type="date" class="form-control" name="tgl_berakhir" value="<?php echo $data['tgl_berakhir']; ?>"  placeholder="Tanggal Berakhir" id="tglberakhir">
                         </div>
-                      </td>       
+                      </td>
                   </div>
                 </table>
                   <center>
-                 <button type="submit" class="btn-primary ">Reset</button>
-                 <button type="submit" name="edit-promosi" class="btn-primary " value="submit">Save</button>
+                 <button type="reset" class="btn btn-primary ">Reset</button>
+                 <button type="submit" name="edit-promosi" class="btn   btn-primary " value="submit">Save</button>
                   </center>
               </form>
             </div>
           <!-- /.box -->
           </div>
-        <!-- /.col -->           
+        <!-- /.col -->
         </div>
-      <!-- /.row -->  
+      <!-- /.row -->
       </div>
     </section>
   <!-- /.content-wrapper -->
-  </div> 
+  </div>
 <?php
-include 'footer.php'; 
+include 'footer.php';
 
 if(isset($_POST['edit-promosi'])) {
 $isi_promosi =$_POST['isi_promosi'];
 $tgl_berlaku =$_POST['tgl_berlaku'];
 $tgl_berakhir =$_POST['tgl_berakhir'];
-  
+
 $query_update=mysqli_query($con, "UPDATE promosi SET isi_promosi='$isi_promosi', tgl_berlaku='$tgl_berlaku', tgl_berakhir='$tgl_berakhir'
                                   WHERE kd_promosi='$kd_promosi'" ) or die (mysqli_error($con));
 
 echo '<script language="javascript">alert("Sukses Mengubah Data ");document.location="promosi.php"</script>';
 }
 ?>
- }
 
-?>
+<script type="text/javascript">
+  function formValidasi() {
+    var isipromosi = $('#isipromosi').val();
+    var tglberlaku = $('#tglberlaku').val();
+    var tglberakhir =$('#tglberakhir').val();
+
+    if (isipromosi == "") {
+      alert("Harap Isi Semua Bidang !!!");
+      return false;
+    }
+    if (tglberlaku == "") {
+      alert("Harap Isi Semua Bidang !!!");
+      return false;
+    }
+    if (tglberakhir == "") {
+      alert("Harap Isi Semua Bidang !!!");
+      return false;
+    }
+    return true;
+  }
+</script>
