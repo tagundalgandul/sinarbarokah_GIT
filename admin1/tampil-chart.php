@@ -65,6 +65,9 @@ $queryLRFM = "SELECT nama_pelanggan,id_pelanggan,
 
  $hasil = mysqli_query($con,$queryLRFM) or die(mysqli(error($con)));
 
+
+
+
  $totalNewCutomer   = [];
  $totalPotensial    = [];
  $totalLostCustomer = [];
@@ -112,6 +115,13 @@ $queryLRFM = "SELECT nama_pelanggan,id_pelanggan,
 ?>
 
 <hr>
+<?php
+if (mysqli_num_rows($hasil) < 1){
+
+   echo "<center><h1>Data Tidak Tersedia</h1></center>";
+   exit;
+}
+?>
 <!-- Data LRFM -->
 <input type="hidden" id="NewCutomer" value="<?php echo count($totalNewCutomer) ?>">
 <input type="hidden" id="Potensial" value="<?php echo count($totalPotensial) ?>">
